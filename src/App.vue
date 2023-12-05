@@ -1,12 +1,14 @@
 <script>
 
 import AppHeader from './/components/AppHeader.vue'
+import AppContent from './/components/AppContent.vue'
 import axios from 'axios'
 import { store } from './store'
 
 export default{
   components: {
-    AppHeader
+    AppHeader,
+    AppContent
   },
   data () {
   return {
@@ -15,19 +17,42 @@ export default{
   }
   },
   mounted(){
-    this.getMovies();
-  },
- 
-  methods: {
-    getMovies(){
-      axios.get(`${this.store.apiCall}${this.store.apiKey}query=${this.store.searchedMovie}`).then(risultato =>{
-        console.log("il log " + risultato.data)
-        
-        
+   
+},
+
+methods: {
+	theLog(){
+		console.log("the log")
+	},
+	
+	getMovies(){
+		const options = {
+        method: 'GET',
+        url: this.store.apiCall,
+        params: {include_adult: 'false',
+		language: 'en-US',
+		page: '1',
+		api_key: this.store.apiKey,
+		query: this.store.searchedMovie,
+		},
+		
+        headers: {
+          accept: 'application/json',
           
-          
-      })
-      
+        }
+	};
+	console.log("VALORE DI 	query  " + this.query)
+	
+	axios.request(options).then(result =>{
+		
+		this.store.movies.push(...result.data)
+		console.log(this.store.movies)
+	})
+	
+	.catch(function (error) {
+		console.error(error);
+	});
+	
       
     }
   },
@@ -38,7 +63,8 @@ export default{
 </script>
 
 <template>
-    <AppHeader />
+    <AppHeader @search="getMovies"/>
+    <AppContent />
 </template>
 
 <style scoped>

@@ -1,6 +1,21 @@
 <script>
+
+import { store } from '../store';
     export default{
-        name: 'AppHeader'
+        name: 'AppHeader',
+
+        data(){
+            return{
+                store,
+            }
+            
+        },
+        methods:{
+            search(){
+                console.log("funziona")
+                this.$emit('search')
+            }
+        }
     }
    
 </script>
@@ -12,6 +27,7 @@
         </div>
         <div>
             <input type="text" placeholder="Cerca film e serie tv" v.model="store.searchedMovie">
+            <button @click="$emit('search')"> CERCA </button>
         </div>
     </section>
 </template>
@@ -28,7 +44,7 @@
         padding: 0 10rem;
     }
     h1{
-        color: rgb(191, 0, 0);
+        color: rgb(207, 0, 0);
         font-size: 32px;
     }
     input{
