@@ -21,9 +21,7 @@ export default{
 },
 
 methods: {
-	theLog(){
-		console.log("the log")
-	},
+	
 	
 	getMovies(){
 		const options = {
@@ -36,12 +34,10 @@ methods: {
 		query: this.store.searchedMovie,
 		},
 		
-        headers: {
-          accept: 'application/json',
-          
-        }
+       
 	};
-	console.log("VALORE DI 	query  " + this.query)
+	console.log("VALORE DI OPTIONS  " + this.store)
+	
 	
 	axios.request(options).then(result =>{
 		
