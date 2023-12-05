@@ -26,7 +26,7 @@ import { store } from '../store';
             <h1>BoolfliX</h1>
         </div>
         <div>
-            <input type="text" placeholder="Cerca film e serie tv" v.model="store.searchedMovie">
+            <input type="text" placeholder="Cerca film e serie tv" v-model="store.searchedMovie">
             <button @click="$emit('search')"> CERCA </button>
         </div>
     </section>

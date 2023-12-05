@@ -36,13 +36,14 @@ methods: {
 		
        
 	};
-	console.log("VALORE DI OPTIONS  " + this.store)
+	console.log("VALORE DI STORE  " + this.store)
 	
 	
 	axios.request(options).then(result =>{
 		
-		this.store.movies.push(...result.data)
-		console.log(this.store.movies)
+		this.store.movies = result.data.results
+		console.log("VALORE DI MOVIES " + this.store.movies)
+		console.log("VALORE DELLA QUERY " +  this.query)
 	})
 	
 	.catch(function (error) {
