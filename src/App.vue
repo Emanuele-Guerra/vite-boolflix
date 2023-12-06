@@ -1,14 +1,16 @@
 <script>
 
 import AppHeader from './/components/AppHeader.vue'
-import AppContent from './/components/AppContent.vue'
+import AppMovie from './/components/AppMovie.vue'
+// import AppSeries from './/components/AppSeries.vue'
 import axios from 'axios'
 import { store } from './store'
 
 export default {
 	components: {
 		AppHeader,
-		AppContent
+		AppMovie,
+		// AppSeries
 	},
 	data() {
 		return {
@@ -34,27 +36,17 @@ export default {
 					api_key: this.store.apiKey,
 					query: this.store.searchedMovie,
 				},
-
-
 			};
-			console.log("VALORE DI STORE  " , this.store)
-
-			console.log(options)
 			axios.request(options).then(result => {
-
 				this.store.movies = result.data.results
-				console.log("VALORE DI MOVIES " , this.store.movies)
-				console.log("VALORE DELLA QUERY " , options.params.query)
 			})
-
 				.catch(function (error) {
 					console.error(error);
 				});
+		},
+	}
+};
 
-
-		}
-	},
-}
 
 
 
@@ -62,8 +54,33 @@ export default {
 
 <template>
 	<AppHeader @search="getMovies" />
-	<AppContent />
+
+
+
+	<h2>MOVIES</h2>
+	<section class="wrapper">
+		<AppMovie v-for="film in this.store.movies" :movieData="film" />
+
+	</section>
+
+
+	<!-- <h2>TV SERIES</h2> -->
+	<!-- <AppSeries /> -->
 </template>
 
-<style scoped></style>
+<style scoped>
+h2 {
+	text-align: center;
+	color: white;
+	margin: 1rem;
+}
+
+.wrapper {
+	width: 90%;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+</style>
 
