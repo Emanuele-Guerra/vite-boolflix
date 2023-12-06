@@ -5,54 +5,55 @@ import AppContent from './/components/AppContent.vue'
 import axios from 'axios'
 import { store } from './store'
 
-export default{
-  components: {
-    AppHeader,
-    AppContent
-  },
-  data () {
-  return {
-    
-    store
-  }
-  },
-  mounted(){
-   
-},
+export default {
+	components: {
+		AppHeader,
+		AppContent
+	},
+	data() {
+		return {
 
-methods: {
-	
-	
-	getMovies(){
-		const options = {
-        method: 'GET',
-        url: this.store.apiCall,
-        params: {include_adult: 'false',
-		language: 'en-US',
-		page: '1',
-		api_key: this.store.apiKey,
-		query: this.store.searchedMovie,
-		},
-		
-       
-	};
-	console.log("VALORE DI STORE  " + this.store)
-	
-	
-	axios.request(options).then(result =>{
-		
-		this.store.movies = result.data.results
-		console.log("VALORE DI MOVIES " + this.store.movies)
-		console.log("VALORE DELLA QUERY " +  this.query)
-	})
-	
-	.catch(function (error) {
-		console.error(error);
-	});
-	
-      
-    }
-  },
+			store
+		}
+	},
+	mounted() {
+
+	},
+
+	methods: {
+
+
+		getMovies() {
+			const options = {
+				method: 'GET',
+				url: this.store.apiCall,
+				params: {
+					include_adult: 'false',
+					language: 'it-IT',
+					page: '1',
+					api_key: this.store.apiKey,
+					query: this.store.searchedMovie,
+				},
+
+
+			};
+			console.log("VALORE DI STORE  " , this.store)
+
+			console.log(options)
+			axios.request(options).then(result => {
+
+				this.store.movies = result.data.results
+				console.log("VALORE DI MOVIES " , this.store.movies)
+				console.log("VALORE DELLA QUERY " , options.params.query)
+			})
+
+				.catch(function (error) {
+					console.error(error);
+				});
+
+
+		}
+	},
 }
 
 
@@ -60,11 +61,9 @@ methods: {
 </script>
 
 <template>
-    <AppHeader @search="getMovies"/>
-    <AppContent />
+	<AppHeader @search="getMovies" />
+	<AppContent />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
 
