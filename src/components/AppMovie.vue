@@ -88,7 +88,6 @@ h5 {
     width: 250px;
     height: 350px;
     perspective: 1000px;
-
 }
 
 
